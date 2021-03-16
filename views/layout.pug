@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    block head-start
+    title= title
+    script(src='/javascripts/jquery-3.6.0.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/bootstrap.bundle.min.js')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    block head-end
+  body
+    block body-start
+
+    div.fill-height
+      include includes/headerNavBar
+      div.container.pb-5.pt-3
+        block content
+        div.pushFooter
+
+    include includes/footer
+
+    block body-end

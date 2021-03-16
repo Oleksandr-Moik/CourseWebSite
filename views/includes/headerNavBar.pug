@@ -1,0 +1,25 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    div.container
+        span.navbar-brand.navbar-brand.mb-0.mr-md-4.h1 Cutting and sewing courses
+        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+
+        div.collapse.navbar-collapse#navbarSupportedContent
+            ul.navbar-nav.mr-auto
+                li.nav-item(class={active: active_tab==="home"})
+                    a.nav-link(href="/") Home page
+
+                li.nav-item(class={active: active_tab==="contacts"})
+                    a.nav-link(href="/contacts") Contacts
+
+                li.nav-item(class={active: active_tab==="about"})
+                    a.nav-link(href="/about") About
+
+            div.my-2.my-lg-0.navbar-text
+                if auth
+                    span.h5.pt-1 Greeting,
+                        a(href='/profile')  #{userName}
+                    a(href='/auth/logout').btn.ml-3.btn-outline-primary Log out
+                else
+                    a.btn.btn-outline-primary.mr-3(href='/auth/login') Sign in
+                    a.btn.btn-success(href='/auth/signup') Sign up

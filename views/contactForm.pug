@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    h1 Contact form
+    if (showForm)
+        p
+         | for contact with us and teacher fill contact form
+         | below and send with your questions or some inner text
+
+        div.row
+            form.col.col-lg-8.shadow.p-3.m-auto(method='post' id='contactForm' name='contactForm' action='/contacts')
+                input(type='hidden', value='form', name='title')
+                div.form-row
+                    div.from-group.col-md-6
+                        label(for='name') Your Name:
+                        input.form-control(name='name' id='name' type='text' placeholder='name' value="valueName")
+                        small#helpBlock.form-text.text-muted Must be 8-20 characters long.
+                    div.from-group.col-md-6
+                        label(for='number') Your contact phone number:
+                        input.form-control(name='phone' id='number' type='text' placeholder='phone number' value="sdfsdfgfdg")
+                div.form-group
+                    label(for='description') Description
+                    textarea#description.form-control(rows='3' name='description' form='contactForm') skjdfhskajh lkshgkjsh okdhsfgk hlak
+                button.btn.btn-primary(type='submit').float-right Submit
+    else if (message)
+        p= `Thanks, ${message.name}, for sending form`
+    else
+        p Something wrong. Try reload page...

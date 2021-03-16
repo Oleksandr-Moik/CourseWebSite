@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    h1 User profile #{user.role}
+    if auth
+        form(method='post')
+            - var {firstName, name, surName, email, phone} = user;
+            input#inputID(type='hidden' value='' name='id')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputFirstName') First name
+                .col-sm-10
+                    input#inputFirstName.form-control(type='text' name='firstname' placeholder='First name')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputName') Name
+                .col-sm-10
+                    input#inputName.form-control(type='text' name='name' placeholder='Name')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputSurname') Surname
+                .col-sm-10
+                    input#inputSurname.form-control(type='text' name='surname' placeholder='Surname')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputPhone') Phone
+                .col-sm-10
+                    input#inputPhone.form-control(type='text' name='phone' placeholder='Phone')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputEmail') Email
+                .col-sm-10
+                    input#inputEmail.form-control(type='email' name='email' placeholder='Email')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputNewPassword') New Password
+                .col-sm-10
+                    input#inputNewPassword.form-control(type='password' name='newPassword' placeholder='New')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputRepeatPassword') Repeat Password
+                .col-sm-10
+                    input#inputRepeatPassword.form-control(type='password' name='repeatPassword' placeholder='Repeat new')
+            hr.border-bottom.border-dark
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputPassword') Enter current password
+                .col-sm-10
+                    input#inputPassword.form-control(type='password' placeholder='password' name='password')
+            .form-group.row
+                .col-sm-10
+                    button.btn.btn-primary(type='submit') Save
+    else
+        p you must login
