@@ -14,7 +14,7 @@ block content
                 a.btn.btn-secondary.mr-2(href = baseAdminUrl) Admin panel
             hr.mb-3
             if model==='index_'
-               include admin/index
+               include admin/collectionTable
             else if model && action && data
                 // {action} are require for child templates
                 case model
@@ -25,6 +25,8 @@ block content
                     when 'task': include ./admin/task/index
                     when 'lesson': include ./admin/lesson/index
                     when 'status': include ./admin/status/index
+            else
+                h1.text-danger data are empty
         .col
             p <b>model</b> #{model}
             p <b>action</b> #{action}

@@ -4,8 +4,9 @@ table.table.table-hover
     thead.thead-light
         tr
             th(scope='col') #
-            th(scope='col') Name
-            th(scope='col') For
+            th(scope='col') Title
+            th(scope='col') Description
+            th(scope='col') Tasks (count)
             th(scope='col') Actions
     tbody
         -
@@ -13,8 +14,10 @@ table.table.table-hover
         each item in data
             tr
                 th(scope='row')= iter
-                td=item.statusName
-                td=item.for
+                td=item.title
+                - var descr = item.description.toString().substring(0,40)+' ...'
+                td=descr
+                td=item.tasks.length
                 td.d-flex
                     //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
                     a.mr-1.btn.btn-warning(href='edit/'+item._id) Edit

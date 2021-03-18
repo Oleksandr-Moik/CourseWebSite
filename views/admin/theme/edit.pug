@@ -1,20 +1,21 @@
 -
     var errors = error;
-    var {statusName, _id} = data;
-    var target = data.for;
+    var {title,description, _id} = data;
+
+pre= tasks
 
 div
     h1.d-inline.mr-4 Editing
-form(method='post' action=currentUrl+'edit/' id='editForm')
+form(method='post' action=currentUrl+'edit' id='editForm')
     input#inputID(type='hidden' value=_id name='_id')
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputName') Name
+        label.col-sm-2.col-form-label(for='inputTitle') Title
         .col-sm-10
-            input#inputName.form-control(type='text' name='statusName' placeholder='name' value=statusName required)
+            input#inputTitle.form-control(type='text' name='title' placeholder='Title' value=title required)
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputTarget') For
-        .col-sm-10
-            input#inputTarget.form-control(type='text' name='target' placeholder='targets' value=target)
+        label.col-sm-2.col-form-label(for='description') Description
+        textarea#description.form-control(rows='3' name='description' form='editForm' required)= description
+
     hr.border-bottom.border-dark
     .form-group.row
         .col-sm-10

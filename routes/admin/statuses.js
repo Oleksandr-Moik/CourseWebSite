@@ -24,7 +24,6 @@ router.post('/create', async (req, res, next)=>{
     }
 })
 
-
 router.get('/edit/:id', async (req, res, next) => {
     try{
         let data = await StatusModel.findOne({_id:req.params.id});

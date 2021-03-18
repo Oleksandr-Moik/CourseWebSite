@@ -1,0 +1,21 @@
+table.table.table-hover#adminTable
+    thead.thead-light
+        tr
+            th(scope='col') #
+            th(scope='col') Collection
+    tbody
+        -
+            var iter = 1;
+            var collections = [
+                {name: "Users", url: 'users/',classes:'bg-success'},
+                {name: "Messages", url: 'messages/',classes:'bg-danger'},
+                {name: "Themes", url: 'themes/',classes:'bg-warning'},
+                {name: "Tasks", url: 'tasks/',classes:'bg-success'},
+                {name: "Lessons", url: 'lessons/',classes:'bg-danger'},
+                {name: "Statuses", url: 'statuses/',classes:'bg-success'},
+            ];
+        each item in collections
+            tr
+                th(scope='row' class=item.classes)= iter
+                td: a(href=baseAdminUrl+item.url) #{item.name}
+            - iter++
