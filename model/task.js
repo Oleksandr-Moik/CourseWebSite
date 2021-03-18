@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongoose');
-const statusSchema = require('./status').schema;
 
 const schema = Schema({
     title:{

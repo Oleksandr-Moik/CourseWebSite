@@ -1,0 +1,23 @@
+a.btn.btn-success.mr-2(href=currentUrl+'create') Create new
+
+table.table.table-hover
+    thead.thead-light
+        tr
+            th(scope='col') #
+            th(scope='col') Title
+            th(scope='col') Description
+            th(scope='col') Actions
+    tbody
+        -
+            var iter = 1;
+        each task in data
+            tr
+                th(scope='row')= iter
+                - var descr = task.description.toString().substring(0,40)+' ...'
+                td=task.title
+                td=descr
+                td.d-flex
+                    //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
+                    a.mr-1.btn.btn-warning(href='edit/'+task._id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+task._id) Delete
+            - iter++

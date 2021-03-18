@@ -18,8 +18,12 @@ router.all('/*', (req, res, next) => {
 router.all('/', (req, res, next) => {
     res.render('admin', {model: 'index_'})
 })
-// for each table route
 
 router.use('/users',  require('./admin/users'));
+router.use(['/tasks','/task'],  require('./admin/tasks'));
+router.use('/lessons',  require('./admin/lessons'));
+router.use('/messages',  require('./admin/messages'));
+router.use('/themes',  require('./admin/themes'));
+router.use('/statues',  require('./admin/statuses'));
 
 module.exports = router;

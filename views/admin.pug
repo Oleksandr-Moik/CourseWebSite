@@ -20,12 +20,12 @@ block content
                 // {action} are require for child templates
                 case model
                     when 'user': include ./admin/user/index
-                    when 'lesson': p include ./admin/lessons/index
-                    when 'message': p include ./admin/messages/index
-                    when 'theme': p include ./admin/themes/index
-                    when 'task': p include ./admin/tasks/index
-                    when 'lesson': p include ./admin/lessons/index
-                    when 'status': p include ./admin/statuses/index
+                    when 'lesson': p include ./admin/lesson/index
+                    when 'message': p include ./admin/message/index
+                    when 'theme': p include ./admin/theme/index
+                    when 'task': include ./admin/task/index
+                    when 'lesson': p include ./admin/lesson/index
+                    when 'status': p include ./admin/statuse/index
         .col
             p <b>model</b> #{model}
             p <b>action</b> #{action}
