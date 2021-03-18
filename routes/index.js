@@ -4,19 +4,19 @@ const Message = require('../model/message')
 const Status = require('../model/status')
 
 router.get('/', (req, res, next) => {
-  res.locals.title = 'Home page';
+  res.locals.pageTitle = 'Home page';
   res.locals.active_tab = 'home';
   res.render('index');
 });
 
 router.get('/about', (req, res) => {
-  res.locals.title = 'About';
+  res.locals.pageTitle = 'About';
   res.locals.active_tab = 'about';
   res.render('about');
 });
 
 router.all('/contacts', (req, res, next) => {
-  res.locals.title = 'Contact';
+  res.locals.pageTitle = 'Contact';
   res.locals.active_tab = 'contacts';
   next()
 })
@@ -32,7 +32,7 @@ router.post('/contacts', async (req, res) => {
 
 router.all('/profile', (req, res, next) => {
   if(res.locals.auth){
-    res.locals.title = 'User profile';
+    res.locals.pageTitle = 'User profile';
     next();
   }else{
     let error = new Error('You must sign in');

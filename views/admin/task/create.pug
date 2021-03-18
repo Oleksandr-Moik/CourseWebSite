@@ -3,7 +3,7 @@
     var {title, description} = data;
 
 div
-    h1.d-inline.mr-4 Editing
+    h1.d-inline.mr-4 Creating
 form(method='post' id='createForm')
     .form-group.row
         label.col-sm-2.col-form-label(for='inputTitle') Title
@@ -11,7 +11,7 @@ form(method='post' id='createForm')
             input#inputTitle.form-control(type='text' name='title' placeholder='title' value=title required)
     .form-group.row
         label.col-sm-2.col-form-label(for='description') Description
-        textarea#description.form-control(rows='3' name='description' form='createForm' required)= description
+        textarea#description.form-control(rows='3' name='description' form='createForm' required) #{description}
     hr.border-bottom.border-dark
     .form-group.row
         .col-sm-10

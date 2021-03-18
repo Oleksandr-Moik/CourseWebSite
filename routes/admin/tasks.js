@@ -10,9 +10,6 @@ router.get('/', async (req, res, next) => {
         next(e)
     }
 });
-router.get('/:id', async (req, res, next) => {
-    res.redirect('.././edit/'+req.params.id)
-});
 
 router.get('/create', async (req,res,next)=>{
     res.render('admin',{model:'task', data:{}, action:'create'})

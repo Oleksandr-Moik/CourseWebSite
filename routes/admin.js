@@ -7,7 +7,7 @@ router.all('/*', (req, res, next) => {
         req.session.user.role &&
         req.session.user.role==='admin' )
     {
-        res.locals.title = 'Admin panel';
+        res.locals.pageTitle = 'Admin panel';
         next();
     }else{
         let err = new Error('Not found');
@@ -24,6 +24,6 @@ router.use(['/tasks','/task'],  require('./admin/tasks'));
 router.use(['/lessons','/lesson'],  require('./admin/lessons'));
 router.use(['/messages','/message'],  require('./admin/messages'));
 router.use(['/themes','/theme'],  require('./admin/themes'));
-router.use(['/statues','/status'],  require('./admin/statuses'));
+router.use(['/statuses','/status'],  require('./admin/statuses'));
 
 module.exports = router;

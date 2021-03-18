@@ -7,7 +7,7 @@ router.all('/signup',(req, res, next) => {
     if(res.locals.auth){
         res.redirect('/profile')
     }else{
-        res.locals.title = 'Register page';
+        res.locals.pageTitle = 'Register page';
         res.locals.formType = 'reg';
         next();
     }
@@ -54,7 +54,7 @@ router.all('/login', (req, res, next) => {
     if(res.locals.auth){
         res.redirect('/profile')
     }else {
-        res.locals.title = 'Login page';
+        res.locals.pageTitle = 'Login page';
         res.locals.formType = 'login';
         next();
     }
