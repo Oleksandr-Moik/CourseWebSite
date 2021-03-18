@@ -19,11 +19,11 @@ router.all('/', (req, res, next) => {
     res.render('admin', {model: 'index_'})
 })
 
-router.use('/users',  require('./admin/users'));
+router.use(['/users','/user'],  require('./admin/users'));
 router.use(['/tasks','/task'],  require('./admin/tasks'));
-router.use('/lessons',  require('./admin/lessons'));
-router.use('/messages',  require('./admin/messages'));
-router.use('/themes',  require('./admin/themes'));
-router.use('/statues',  require('./admin/statuses'));
+router.use(['/lessons','/lesson'],  require('./admin/lessons'));
+router.use(['/messages','/message'],  require('./admin/messages'));
+router.use(['/themes','/theme'],  require('./admin/themes'));
+router.use(['/statues','/status'],  require('./admin/statuses'));
 
 module.exports = router;

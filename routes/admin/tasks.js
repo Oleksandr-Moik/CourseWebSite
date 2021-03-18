@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
         next(e)
     }
 });
-router.get('/view/:id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     res.redirect('.././edit/'+req.params.id)
 });
 
