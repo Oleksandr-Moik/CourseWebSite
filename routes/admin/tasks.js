@@ -56,7 +56,7 @@ router.post('/delete/:id', async (req, res, next) => {
     try{
         let {_id} = req.body;
         await TaskModel.deleteOne({_id})
-        res.redirect('tasks');
+        res.redirect('tasks/');
     }catch (e){
         next(e);
     }

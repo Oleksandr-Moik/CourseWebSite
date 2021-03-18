@@ -1,7 +1,6 @@
 -
     var errors = error;
-    var {statusName, _id} = data;
-    var target = data.for;
+    var {statusName='', _id='', for:target='', Targets=[]} = data;
 
 div
     h1.d-inline.mr-4 Editing
@@ -15,7 +14,10 @@ form(method='post' action=currentUrl+'edit' id='editForm')
     .form-group.row
         label.col-sm-2.col-form-label(for='inputTarget') For
         .col-sm-10
-            input#inputTarget.form-control(type='text' name='target' placeholder='targets' value=target required)
+            select#inputTarget.form-control(multiple='' name='target' required)
+                each item in Targets
+                    - var select = target.includes(item)
+                    option(value=item selected=select)= item
     hr.border-bottom.border-dark
     .form-group.row
         .col-sm-10

@@ -1,5 +1,6 @@
 -
     var errors = error;
+    var {statusName='', _id='', for:target='',Targets=[]} = data;
 
 div
     h1.d-inline.mr-4 Creating
@@ -11,7 +12,9 @@ form(method='post' id='createForm')
     .form-group.row
         label.col-sm-2.col-form-label(for='inputTarget') For
         .col-sm-10
-            input#inputTarget.form-control(type='text' name='target' placeholder='targets' value=target)
+            select#inputTarget.form-control(multiple='' name='target' required)
+                each item in Targets
+                    option(value=item)= item
     hr.border-bottom.border-dark
     .form-group.row
         .col-sm-10

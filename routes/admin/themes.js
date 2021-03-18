@@ -64,7 +64,7 @@ router.post('/delete/:id', async (req, res, next) => {
     try{
         let {_id} = req.body;
         await ThemeModel.deleteOne({_id})
-        res.redirect('..');
+        res.redirect('themes/');
     }catch (e){
         next(e);
     }

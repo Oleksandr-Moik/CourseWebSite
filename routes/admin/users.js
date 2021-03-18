@@ -63,11 +63,11 @@ router.post('/delete/:id', async (req, res, next) => {
         let {_id, permanent} = req.body;
         if(permanent==='on'){
             await UserModel.deleteOne({_id})
-            res.redirect('users');
+            res.redirect('users/');
         }else{
             let status = await StatusModel.findOne({statusName:'deleted'});
             await UserModel.findOneAndUpdate({_id}, {status})
-            res.redirect('users');
+            res.redirect('users/');
         }
         // res.json(user).send();
     }catch (e){
