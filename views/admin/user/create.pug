@@ -1,7 +1,18 @@
 -
-    var firstName='', name='', surname='', email='', phone='', role='', status='';
     var errors = error;
-    // var {firstName, name, surname, email, phone, role, status, _id} = data.user;
+    var {
+        firstName = '',
+        name = '',
+        surname = '',
+        email = '',
+        phone = '',
+        role = '',
+        status = '',
+        _id = '',
+        statuses = [],
+        roles=[]
+    } = data;
+
 div
     h1.d-inline.mr-4 Creating
 form(method='post')
@@ -25,15 +36,23 @@ form(method='post')
         label.col-sm-2.col-form-label(for='inputEmail') Email
         .col-sm-10
             input#inputEmail.form-control(type='email' name='email' placeholder='Email' value=email)
-    // todo : list of statuses and roles
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputRole') Role
+        label.col-sm-2.col-form-label(for='roleSelect') Select role
         .col-sm-10
-            input#inputRole.form-control(type='text' name='role' placeholder='Role' value='student')
+            select#roleSelect.form-control(name='role')
+                - var select = true
+                each item in roles
+                    option(value=item selected=select)=item
+                    - var select=false
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputEmail') Status
+        label.col-sm-2.col-form-label(for='statusSelect') Select status
         .col-sm-10
-            input#inputStatus.form-control(type='text' name='statusName' placeholder='Status' value='active')
+            select#statusSelect.form-control(name='statusName')
+                - var select = true
+                each itemm in statuses
+                    - var {statusName:item} = itemm
+                    option(value=item selected=select)=item
+                    - var select=false
     .form-group.row
         label.col-sm-2.col-form-label(for='inputPassword') Set new password
         .col-sm-10

@@ -1,14 +1,26 @@
 -
     var errors = error;
-    var {firstName, name, surname, email, phone, role, status, _id} = data;
+    var {
+        firstName='',
+        name='',
+        surname='',
+        email='',
+        phone='',
+        role='',
+        status='',
+        _id='',
+        statuses=[],
+        roles = []
+    } = data;
+
 div
     h1.d-inline.mr-4 #{name}
     p
         span: b Role:
-        |  #{role}
+        | #{role}
         span.ml-2: b Account status:
         | #{status.statusName || ''}
-form(method='post' action=currentUrl+'/edit')
+form(method='post' action=currentUrl+'edit/')
     input#inputID(type='hidden' value=_id name='_id')
     .form-group.row
         label.col-sm-2.col-form-label(for='inputFirstName') First name
@@ -30,17 +42,23 @@ form(method='post' action=currentUrl+'/edit')
         label.col-sm-2.col-form-label(for='inputEmail') Email
         .col-sm-10
             input#inputEmail.form-control(type='email' name='email' placeholder='Email' value=email)
-    // todo : list of statuses and roles
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputRole') Role
+        label.col-sm-2.col-form-label(for='roleSelect') Select role
         .col-sm-10
-            input#inputRole.form-control(type='text' name='role' placeholder='Role' value=role)
+            select#roleSelect.form-control(name='role')
+                each item in roles
+                    - var select = item === role
+                    option(value=item selected=select)=item
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputEmail') Status
+        label.col-sm-2.col-form-label(for='statusSelect') Select status
         .col-sm-10
-            input#inputStatus.form-control(type='text' name='statusName' placeholder='Status' value=status.statusName||'')
+            select#statusSelect.form-control(name='statusName')
+                each itemm in statuses
+                    - var {statusName:item} = itemm
+                    - var select = status.statusName===item
+                    option(value=item selected=select)= item
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputPassword') Set new password
+        label.col-sm-2.col-form-label(for='inputPassword') Set new password (or repeat current)
         .col-sm-10
             input#inputPassword.form-control(type='password' placeholder='password' name='password' required)
     hr.border-bottom.border-dark

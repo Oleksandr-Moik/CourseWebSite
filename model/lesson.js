@@ -6,6 +6,10 @@ const schema = Schema({
         type: String,
         require: true
     },
+    user:{
+        type:String,
+        require: true,
+    },
     startedAt:{
         type: Date,
         default: Date.now

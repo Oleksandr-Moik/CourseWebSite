@@ -1,28 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const UserModel = require('../../model/user');
-const StatusModel = require('../../model/status')
+const StatusModel = require('../../model/status');
+const Roles = ['student','teacher','admin']; // equals in model/user-scheme-role-enum
 
 router.get('/', async (req, res, next) => {
     try{
         let list = await UserModel.find({});
-        res.render('admin', {model:'user', data:list, action:'list'})
+        res.render('admin', {model:'user', data: list, action:'list'})
     }catch (e){
         next(e)
     }
 });
-router.get('/view/:id', async (req, res, next) => {
-    res.redirect('.././edit/'+req.params.id)
-    // try{
-    //     let user = await UserModel.findOne({_id:req.params.id});
-    //     res.render('admin', {model:'user', data: user, action: "edit"})
-    // }catch (e){
-    //     next(e)
-    // }
-});
 
 router.get('/create', async (req,res,next)=>{
-    res.render('admin',{model:'user', data:{}, action:'create'})
+    let statuses = await StatusModel.find({for:'user'});
+    res.render('admin',{model:'user', data:{roles: Roles, statuses}, action:'create'})
 });
 router.post('/create', async (req, res, next)=>{
     try{
@@ -35,22 +28,21 @@ router.post('/create', async (req, res, next)=>{
     }
 })
 
-
 router.get('/edit/:id', async (req, res, next) => {
     try{
         let document = await UserModel.findOne({_id:req.params.id});
-        res.render('admin', {model:'user', data: document, action: "edit"})
+        let statuses = await StatusModel.find({for:'user'});
+        let data = {...document._doc, statuses, roles:Roles};
+        res.render('admin', {model:'user', data, action: "edit"})
     }catch (e){
         next(e)
     }
 });
-router.post('/edit/:id', async (req, res, next) => {
+router.post(['/edit','/edit/:id'], async (req, res, next) => {
     try{
         let {firstName, name, surName, email, phone, password, role, statusName, _id} = req.body
-        // if (id===_id)
         let status = await StatusModel.findOne({statusName});
         await UserModel.findOneAndUpdate ({_id},{firstName, name, surName, email, phone, password, role, status})
-        // res.redirect('edit/'+_id)
         res.redirect('.././edit/'+_id)
     }catch (e){
         next(e);

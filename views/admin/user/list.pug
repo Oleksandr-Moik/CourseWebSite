@@ -14,16 +14,17 @@ table.table.table-hover
         -
             var iter = 1;
         each user in data
+            - var {firstName='', name='', surname='', email='', phone='', role='', status='', _id=''} = user
             tr
                 th(scope='row')= iter
-                - var userName = `${user.firstName||''} ${user.name||''} ${user.surname||''}`
+                - var userName = `${firstName} ${name} ${surname}`
                 td=userName
-                td=user.phone
-                td=user.email
-                td=user.role
-                td=user.status.statusName||''
+                td=phone
+                td=email
+                td=role
+                - var {statusName=''} = status
+                td=statusName
                 td.d-flex
-                    //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
-                    a.mr-1.btn.btn-warning(href='edit/'+user._id) Edit
-                    a.mr-1.btn.btn-danger(href='delete/'+user._id) Delete
+                    a.mr-1.btn.btn-warning(href='edit/'+_id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+_id) Delete
             - iter++

@@ -26,4 +26,8 @@ router.use(['/messages','/message'],  require('./admin/messages'));
 router.use(['/themes','/theme'],  require('./admin/themes'));
 router.use(['/statuses','/status'],  require('./admin/statuses'));
 
+router.use((err, req, res, next) => {
+    console.log('admin error');
+    next(err)
+})
 module.exports = router;

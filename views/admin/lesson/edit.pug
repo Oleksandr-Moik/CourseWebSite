@@ -1,18 +1,17 @@
 -
     var errors = error;
-    var {statusName, _id} = data;
-    var target = data.for;
+    var {_id, theme:themeId, user:userId, status} = data;
 
 div
     h1.d-inline.mr-4 Editing
 form(method='post' action=currentUrl+'edit/' id='editForm')
     input#inputID(type='hidden' value=_id name='_id')
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputName') Name
+        label.col-sm-2.col-form-label(for='inputName') Theme
         .col-sm-10
             input#inputName.form-control(type='text' name='statusName' placeholder='name' value=statusName required)
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputTarget') For
+        label.col-sm-2.col-form-label(for='inputTarget') User
         .col-sm-10
             input#inputTarget.form-control(type='text' name='target' placeholder='targets' value=target)
     hr.border-bottom.border-dark
