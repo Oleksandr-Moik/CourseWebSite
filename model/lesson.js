@@ -10,13 +10,6 @@ const schema = Schema({
         type:String,
         require: true,
     },
-    startedAt:{
-        type: Date,
-        default: Date.now
-    },
-    endedAt:{
-        type: Date,
-    },
     status:{
         type: statusSchema,
     }

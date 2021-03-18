@@ -1,22 +1,29 @@
-a.btn.btn-success.mr-2(href=currentUrl+'create') Create new
+a.btn.btn-success.mr-2(href=currentUrl+'create') Create new User
 
 table.table.table-hover
     thead.thead-light
         tr
             th(scope='col') #
-            th(scope='col') Name
-            th(scope='col') For
-            th(scope='col') Actions
+            th(scope='col') Theme
+            th(scope='col') User
+            th(scope='col') Status
+            th(scope='col') actions
     tbody
         -
             var iter = 1;
-        each item in data
+            var {themes=[], users=[]} = additionalData;
+        each lesson in data
+            -
+                var {theme:themeId, user:userId, status:{statusName}, _id=''} = lesson
+                var user = users.find(u=>u._id.toString()===userId)
+                var {title} = themes.find(t=>t._id.toString()===themeId)
+                var userName = `${user.firstName||''} ${user.name||''}`
             tr
                 th(scope='row')= iter
-                td=item.statusName
-                td=item.for
+                td=title
+                td=userName
+                td=statusName
                 td.d-flex
-                    //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
-                    a.mr-1.btn.btn-warning(href='edit/'+item._id) Edit
-                    a.mr-1.btn.btn-danger(href='delete/'+item._id) Delete
+                    a.mr-1.btn.btn-warning(href='edit/'+_id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+_id) Delete
             - iter++
