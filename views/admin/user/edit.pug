@@ -20,7 +20,7 @@ div
         | #{role}
         span.ml-2: b Account status:
         | #{status.statusName || ''}
-form(method='post' action=currentUrl+'edit/')
+form(method='post' action=currentUrl+'edit')
     input#inputID(type='hidden' value=_id name='_id')
     .form-group.row
         label.col-sm-2.col-form-label(for='inputFirstName') First name

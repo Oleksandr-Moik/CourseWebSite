@@ -4,19 +4,29 @@ table.table.table-hover
     thead.thead-light
         tr
             th(scope='col') #
-            th(scope='col') Name
-            th(scope='col') For
+            th(scope='col') Title
+            th(scope='col') Description
+            th(scope='col') Target
+            th(scope='col') Created
+            th(scope='col') Status
             th(scope='col') Actions
     tbody
         -
             var iter = 1;
         each item in data
+            - var {title='', description='', targetUser:userId='', status:{statusName=''}, createdAt='', _id} = item
             tr
                 th(scope='row')= iter
-                td=item.statusName
-                td=item.for
+                td=title
+                -
+                    var shortDesc = description
+                    if (description.length>20)
+                        shortDesc = description.substring(0,19)+"..."
+                td=shortDesc
+                td=userId
+                td=createdAt
+                td=statusName
                 td.d-flex
-                    //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
-                    a.mr-1.btn.btn-warning(href='edit/'+item._id) Edit
-                    a.mr-1.btn.btn-danger(href='delete/'+item._id) Delete
+                    a.mr-1.btn.btn-warning(href='edit/'+_id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+_id) Delete
             - iter++

@@ -1,5 +1,5 @@
 div.row
-    h1 Are you sure what want delete '#{data.title}'
+    h1 Are you sure what want delete '#{data.title} #{data.description}'
     form.col.col-lg-8.shadow.p-3.m-auto(method='post')
         input(type='hidden' value=data._id name='_id')
         .form-group.form-check

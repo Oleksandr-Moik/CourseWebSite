@@ -11,43 +11,4 @@ router.get(
     }
 );
 
-router.get(
-    '/:id',
-    async (req, res, next) => {
-        try{
-            let {id} = req.params;
-            let lesson = await LessonModel.find({_id:id})
-            res.json(lesson)
-        }catch (err){
-            next(err)
-        }
-    }
-);
-
-// update
-router.patch(
-    '/:id',
-    async (req, res, next) => {
-
-    }
-);
-
-router.post(
-    '/',
-    async (req, res, next) => {
-        try{
-
-        }catch (e){
-            next(e)
-        }
-    }
-);
-
-router.delete(
-    '/:id',
-    async (req, res, next) => {
-
-    }
-);
-
 module.exports = router;

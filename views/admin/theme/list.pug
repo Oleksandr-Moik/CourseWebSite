@@ -12,14 +12,21 @@ table.table.table-hover
         -
             var iter = 1;
         each item in data
+            - var {title='', description='', tasks=[], _id=''} = item
             tr
                 th(scope='row')= iter
-                td=item.title
-                - var descr = item.description.toString().substring(0,40)+' ...'
-                td=descr
-                td=item.tasks.length
+
+                - var short = title, maxLength = 30
+                if title.length > maxLength
+                    - short = title.substring(0, maxLength)+'...'
+                td=short
+
+                - short = description; maxLength = 50
+                if description.length>maxLength
+                    - short = description.substring(0, maxLength)+'...'
+                td=short
+                td=tasks.length
                 td.d-flex
-                    //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
-                    a.mr-1.btn.btn-warning(href='edit/'+item._id) Edit
-                    a.mr-1.btn.btn-danger(href='delete/'+item._id) Delete
+                    a.mr-1.btn.btn-warning(href='edit/'+_id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+_id) Delete
             - iter++
