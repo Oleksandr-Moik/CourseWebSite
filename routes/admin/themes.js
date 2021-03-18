@@ -14,12 +14,17 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/create', async (req,res,next)=>{
-    res.render('admin',{model:'theme', data:{}, action:'create'})
+    try{
+        let tasks = await TaskModel.find({});
+        res.render('admin',{model:'theme', data:{}, action:'create', tasks})
+    }catch (e){
+        next(e)
+    }
 });
 router.post('/create', async (req, res, next)=>{
     try{
         let {title, description, tasks} = req.body
-        tasks=[];
+        // tasks=[];
         let document = await new ThemeModel({title, description, tasks}).save();
         res.redirect('edit/'+document._id);
     }catch (e){
@@ -31,9 +36,7 @@ router.post('/create', async (req, res, next)=>{
 router.get('/edit/:id', async (req, res, next) => {
     try{
         let data = await ThemeModel.findOne({_id:req.params.id});
-        let tasks = await TaskModel.find({_id:{
-                $in: data.tasks.filter(item=>mongoose.Types.ObjectId(item))
-            }})
+        let tasks = await TaskModel.find({});
         res.render('admin', {model:'theme', data, action: "edit",tasks})
     }catch (e){
         next(e)
@@ -41,8 +44,8 @@ router.get('/edit/:id', async (req, res, next) => {
 });
 router.post('/edit', async (req, res, next) => {
     try{
-        let {title, description, _id} = req.body
-        await ThemeModel.findOneAndUpdate ({_id},{title, description})
+        let {title, description, tasks, _id} = req.body
+        await ThemeModel.findOneAndUpdate ({_id},{title, description, tasks})
         res.redirect('edit/'+_id)
     }catch (e){
         next(e);

@@ -11,6 +11,11 @@ form(method='post' action=currentUrl+'create' id='editForm')
     .form-group.row
         label.col-sm-2.col-form-label(for='description') Description
         textarea#description.form-control(rows='3' name='description' form='editForm' required)= description
+    .form-group
+        label(for='taskSelect') Select task
+        select#taskSelect.form-control(multiple='' name='tasks')
+            each task in tasks
+                option(value=task._id)= task.title
 
     hr.border-bottom.border-dark
     .form-group.row
