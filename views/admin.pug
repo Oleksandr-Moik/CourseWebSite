@@ -3,7 +3,7 @@ extends layout
 block content
     //
         model - as table name
-        data - list of models or single model
+        data - list of models, single model and additional data
         action - [list, edit, create, view]
     -
         var baseAdminUrl = '/adminka/'
@@ -11,7 +11,7 @@ block content
     .row
         .col
             .d-flex
-                a.btn.btn-secondary.mr-2(href = baseAdminUrl) Admin panel
+                a.btn.btn-primary.mr-2(href = baseAdminUrl) Admin panel
             hr.mb-3
             if model==='index_'
                include admin/collectionTable

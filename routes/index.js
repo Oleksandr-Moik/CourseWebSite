@@ -1,12 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const Message = require('../model/message')
-const Status = require('../model/status')
+const MessageModel = require('../model/message')
+const StatusModel = require('../model/status')
+const ThemeModel = require('../model/theme')
+const LessonsModel = require('../model/lesson')
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   res.locals.pageTitle = 'Home page';
   res.locals.active_tab = 'home';
-  res.render('index');
+  try{
+    if(res.locals.auth){
+      let lessons = await LessonsModel.find({user:req.session.user._id})
+      let themes = await ThemeModel.find({})
+      res.render('index',{lessons, themes});
+    }else{
+      res.render('index');
+    }
+  }catch (e){
+    next(e)
+  }
 });
 
 router.get('/about', (req, res) => {
@@ -25,8 +37,8 @@ router.get('/contacts', (req, res) => {
 });
 router.post('/contacts', async (req, res) => {
   let {title, name, phone, description} = req.body;
-  let status = await Status.findOne({statusName:'notReaded'})
-  let message = await new Message({title, name, phone, description, status}).save()
+  let status = await StatusModel.findOne({statusName:'notReaded'})
+  let message = await new MessageModel({title, name, phone, description, status}).save()
   res.render('contactForm', {showForm: false, message})
 })
 
