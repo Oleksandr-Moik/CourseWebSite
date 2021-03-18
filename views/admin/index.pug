@@ -1,0 +1,21 @@
+table.table.table-hover#adminTable
+    thead.thead-light
+        tr
+            th(scope='col') #
+            th(scope='col') Collection
+    tbody
+        -
+            var iter = 1;
+            var collections = [
+                {name: "Users", url: 'users/',},
+                {name: "Messages", url: 'messages/',},
+                {name: "Themes", url: 'themes/',},
+                {name: "Tasks", url: 'tasks/',},
+                {name: "Lessons", url: 'lessons/',},
+                {name: "Statuses", url: 'statuses/',},
+            ];
+        each coll in collections
+            tr
+                th(scope='row')= iter
+                td: a(href=baseAdminUrl+coll.url) #{coll.name}
+            - iter++

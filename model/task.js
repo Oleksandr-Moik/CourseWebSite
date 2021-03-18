@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
+const statusSchema = require('./status').schema;
 
-// task
 const schema = Schema({
     title:{
         type: String,

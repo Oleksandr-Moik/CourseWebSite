@@ -20,8 +20,7 @@ mongoose.connection.on('error', error => console.log(error) );
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// middleware
-// require('./auth/auth');
+// middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

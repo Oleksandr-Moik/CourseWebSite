@@ -1,0 +1,29 @@
+a.btn.btn-success.mr-2(href=currentUrl+'create') Create new User
+
+table.table.table-hover
+    thead.thead-light
+        tr
+            th(scope='col') #
+            th(scope='col') User
+            th(scope='col') Phone
+            th(scope='col') Email
+            th(scope='col') Role
+            th(scope='col') Status
+            th(scope='col') actions
+    tbody
+        -
+            var iter = 1;
+        each user in data
+            tr
+                th(scope='row')= iter
+                - var userName = `${user.firstName||''} ${user.name||''} ${user.surname||''}`
+                td=userName
+                td=user.phone
+                td=user.email
+                td=user.role
+                td=user.status.statusName||''
+                td.d-flex
+                    //a.mr-1.btn.btn-primary(href=append+'/view/'+user._id) View
+                    a.mr-1.btn.btn-warning(href='edit/'+user._id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+user._id) Delete
+            - iter++

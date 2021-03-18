@@ -57,7 +57,7 @@ router.post(
             // await body.map(status=>{
             //     new StatusModel({...status}).save()
             // })
-            // res.redirect('/api/statuses')
+            // res.redirect('/admin/statuses')
             let status = await new StatusModel({...body}).save()
             res.json(status)
         }catch (e){

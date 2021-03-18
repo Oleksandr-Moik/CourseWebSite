@@ -1,6 +1,34 @@
 extends layout
 
 block content
-    p adfsdfsdfgsd
-    //h1 #{table}#{model} > #{id}
-    //h2 #{filters}
+    //
+        model - as table name
+        data - list of models or single model
+        action - [list, edit, create, view]
+    -
+        var baseAdminUrl = '/adminka/'
+
+
+    .row
+        .col
+            .d-flex
+                a.btn.btn-secondary.mr-2(href = baseAdminUrl) Admin panel
+            hr.mb-3
+            if model==='index_'
+               include admin/index
+            else if model && action && data
+                // {action} are require for child templates
+                case model
+                    when 'user': include ./admin/user/index
+                    when 'lesson': p include ./admin/lessons/index
+                    when 'message': p include ./admin/messages/index
+                    when 'theme': p include ./admin/themes/index
+                    when 'task': p include ./admin/tasks/index
+                    when 'lesson': p include ./admin/lessons/index
+                    when 'status': p include ./admin/statuses/index
+        .col
+            p <b>model</b> #{model}
+            p <b>action</b> #{action}
+            p <b>data</b>
+            pre.card.border-dark #{data}
+

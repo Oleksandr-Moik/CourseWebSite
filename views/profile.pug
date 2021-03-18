@@ -1,44 +1,54 @@
 extends layout
 
 block content
-    h1 User profile #{user.role}
+    - var firstName='', name='', surname='', email='', phone='', role='', status='';
+    - var errors = error
     if auth
+        - var {firstName, name, surname, email, phone, role, status, _id} = user;
+        div
+            h1.d-inline.mr-4 #{name}`s profile
+            if role
+                p
+                    span: b Role:
+                    |  #{role}
+                if status && status.statusName
+                    span.ml-2: b Account status:
+                    | #{status.statusName}
         form(method='post')
-            - var {firstName, name, surName, email, phone} = user;
-            input#inputID(type='hidden' value='' name='id')
+            input#inputID(type='hidden' value=_id name='id')
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputFirstName') First name
                 .col-sm-10
-                    input#inputFirstName.form-control(type='text' name='firstname' placeholder='First name')
+                    input#inputFirstName.form-control(type='text' name='firstname' placeholder='First name' value=firstName)
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputName') Name
                 .col-sm-10
-                    input#inputName.form-control(type='text' name='name' placeholder='Name')
+                    input#inputName.form-control(type='text' name='name' placeholder='Name' value=name)
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputSurname') Surname
                 .col-sm-10
-                    input#inputSurname.form-control(type='text' name='surname' placeholder='Surname')
+                    input#inputSurname.form-control(type='text' name='surname' placeholder='Surname' value=surname)
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputPhone') Phone
                 .col-sm-10
-                    input#inputPhone.form-control(type='text' name='phone' placeholder='Phone')
+                    input#inputPhone.form-control(type='text' name='phone' placeholder='Phone' value=phone)
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputEmail') Email
                 .col-sm-10
-                    input#inputEmail.form-control(type='email' name='email' placeholder='Email')
+                    input#inputEmail.form-control(type='email' name='email' placeholder='Email' value=email)
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputNewPassword') New Password
                 .col-sm-10
-                    input#inputNewPassword.form-control(type='password' name='newPassword' placeholder='New')
+                    input#inputNewPassword.form-control(type='password' name='newPassword' placeholder='New' suggested="new-password")
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputRepeatPassword') Repeat Password
                 .col-sm-10
-                    input#inputRepeatPassword.form-control(type='password' name='repeatPassword' placeholder='Repeat new')
+                    input#inputRepeatPassword.form-control(type='password' name='repeatPassword' placeholder='Repeat new' suggested="new-password")
             hr.border-bottom.border-dark
             .form-group.row
                 label.col-sm-2.col-form-label(for='inputPassword') Enter current password
                 .col-sm-10
-                    input#inputPassword.form-control(type='password' placeholder='password' name='password')
+                    input#inputPassword.form-control(type='password' placeholder='password' name='password' suggested="current-password")
             .form-group.row
                 .col-sm-10
                     button.btn.btn-primary(type='submit') Save

@@ -50,7 +50,7 @@ build/
 lib-cov
 pids
 results
-config.js
+#config.js
 admins.json
 
 # Sublime editor

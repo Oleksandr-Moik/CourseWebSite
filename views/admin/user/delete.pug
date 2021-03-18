@@ -1,0 +1,8 @@
+div.row
+    h1 Are you sure what want delete #{data.firstName} #{data.name}
+    form.col.col-lg-8.shadow.p-3.m-auto(method='post')
+        input(type='hidden' value=data._id name='_id')
+        .form-group.form-check
+            input#checkPermanent.form-check-input(type='checkbox' name='permanent' value='false')
+            label.form-check-label(for='checkPermanent') permanent
+        button.btn.btn-danger(type='submit').float-right Delete

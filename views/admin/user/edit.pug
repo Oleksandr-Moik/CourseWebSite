@@ -1,0 +1,50 @@
+-
+    var errors = error;
+    var {firstName, name, surname, email, phone, role, status, _id} = data;
+div
+    h1.d-inline.mr-4 #{name}
+    p
+        span: b Role:
+        |  #{role}
+        span.ml-2: b Account status:
+        | #{status.statusName || ''}
+form(method='post' action=currentUrl+'/edit')
+    input#inputID(type='hidden' value=_id name='_id')
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputFirstName') First name
+        .col-sm-10
+            input#inputFirstName.form-control(type='text' name='firstName' placeholder='First name' value=firstName)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputName') Name
+        .col-sm-10
+            input#inputName.form-control(type='text' name='name' placeholder='Name' value=name)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputSurname') Surname
+        .col-sm-10
+            input#inputSurname.form-control(type='text' name='surname' placeholder='Surname' value=surname)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputPhone') Phone
+        .col-sm-10
+            input#inputPhone.form-control(type='text' name='phone' placeholder='Phone' value=phone)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputEmail') Email
+        .col-sm-10
+            input#inputEmail.form-control(type='email' name='email' placeholder='Email' value=email)
+    // todo : list of statuses and roles
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputRole') Role
+        .col-sm-10
+            input#inputRole.form-control(type='text' name='role' placeholder='Role' value=role)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputEmail') Status
+        .col-sm-10
+            input#inputStatus.form-control(type='text' name='statusName' placeholder='Status' value=status.statusName||'')
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputPassword') Set new password
+        .col-sm-10
+            input#inputPassword.form-control(type='password' placeholder='password' name='password' required)
+    hr.border-bottom.border-dark
+    .form-group.row
+        .col-sm-10
+            button.btn.btn-success(type='submit') Save
+

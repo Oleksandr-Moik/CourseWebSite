@@ -1,0 +1,15 @@
+// data
+    action
+
+- var currentUrl = baseAdminUrl+'users/'
+if action!=='list'
+    a.btn.btn-primary.mr-2(href=currentUrl) All users
+
+case action
+    when 'list': include ./list
+    //when 'view': include ./view
+    when 'edit': include ./edit
+    when 'create': include ./create
+    when 'delete': include ./delete
+
+

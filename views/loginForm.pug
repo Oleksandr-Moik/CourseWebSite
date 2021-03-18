@@ -11,10 +11,10 @@ block content
     div.row: div.m-auto.col-sm-8.col-md-6
         div.card.text-center.text-dark.border-info.mb-3
             div.card-header
-                - var title = 'Login form'
+                - var caption = 'Login form'
                 if formType==='reg'
-                    - title = 'Register form'
-                p.h3= title
+                    - caption = 'Register form'
+                p.h3= caption
             form.card-body(method='post')
                 if error
                     p= error.message
@@ -37,7 +37,7 @@ block content
                     input#email.form-control(type='email' name='email' placeholder='Enter email' value=email)
                 div.form-group
                     label(for='password') Password
-                    input#password.form-control(type='password' name='password' placeholder='password')
+                    input#password.form-control(type='password' name='password' placeholder='password' suggested="current-password")
                 - var btnName = 'Sign in'
                 if formType==='reg'
                     - btnName = 'Sign up'

@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
+const statusSchema = require('./status').schema;
 
 const schema = Schema({
     firstName: {type: String},
@@ -7,12 +8,12 @@ const schema = Schema({
     surname: {type: String},
     phone:  {
         type: String,
-        validate: {
-            validator: function(v) {
-                return /^(\+(380)|380)\s[1-9]{2}\s\d{3}([\-\s]\d{2}){2}$/.test(v);
-            },
-            message: props => `${props.value} is not a valid phone number!`
-        },
+        // validate: {
+        //     validator: function(v) {
+        //         return /^(\+(380)|380)\s[1-9]{2}\s\d{3}([\-\s]\d{2}){2}$/.test(v);
+        //     },
+        //     message: props => `${props.value} is not a valid phone number!`
+        // },
     },
     email:{
         type: String,
@@ -33,8 +34,7 @@ const schema = Schema({
         enum: ['student','teacher','admin']
     },
     status:{
-        type: String,
-        default: ''
+        type: statusSchema
     }
 });
 

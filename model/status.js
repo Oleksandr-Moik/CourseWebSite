@@ -1,6 +1,5 @@
 const {Schema, model} = require('mongoose');
 
-// status
 const schema = Schema({
     statusName: {
         type: String,

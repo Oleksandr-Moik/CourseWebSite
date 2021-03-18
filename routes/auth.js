@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.all('/signup',(req, res, next) => {
     if(res.locals.auth){
-        res.redirect('/')
+        res.redirect('/profile')
     }else{
         res.locals.title = 'Register page';
         res.locals.formType = 'reg';
@@ -40,6 +40,8 @@ router.post('/signup', async (req, res,next) => {
                     status
                 }).save();
                 req.session.user = user;
+                res.locals.auth = true;
+
                 res.redirect('/profile');
             }catch (e){
                 next(e)
@@ -69,6 +71,7 @@ router.post('/login', async (req, res, next) => {
         if(user){
             if(user.isValidPassword(password)){
                 req.session.user = user;
+                res.locals.auth = true;
                 res.redirect('/profile');
             }else{
                 res.render('loginForm',
@@ -83,8 +86,9 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/logout', (req, res, next) => {
     req.session.destroy();
+    res.locals.auth = false;
+    res.cookie('user','',{maxAge:0})
     res.redirect('/auth/login')
 })
-
 
 module.exports = router
