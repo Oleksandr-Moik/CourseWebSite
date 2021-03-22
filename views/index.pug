@@ -7,11 +7,11 @@ block content
       each lesson in lessons
         - var theme = themes.find(theme=>theme._id.toString()===lesson.theme)
         .card.col-md-6.border-info
-          .card-header= "status: " + lesson.status.statusName
+          .card-header= "Стан: " + lesson.status.statusName
           .card-body.text-info
             h5.card-title= theme.title
             p.card-text= theme.description
-          .card-footer= 'tasks: ' + theme.tasks.length
+          .card-footer= 'Завдань: ' + theme.tasks.length
 
 
 

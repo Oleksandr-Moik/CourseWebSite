@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
     - var firstName='', name='', surname='', email='', phone='', role='', status='';
@@ -6,13 +6,13 @@ block content
     if auth
         - var {firstName, name, surname, email, phone, role, status, _id} = user;
         div
-            h1.d-inline.mr-4 #{name}`s profile
+            h1.d-inline.mr-4 Профіль #{name}
             if role
                 p
-                    span: b Role:
+                    span: b Роль:
                     |  #{role}
                 if status && status.statusName
-                    span.ml-2: b Account status:
+                    span.ml-2: b Статус акаунту:
                     | #{status.statusName}
         form(method='post')
             input#inputID(type='hidden' value=_id name='id')
@@ -51,6 +51,6 @@ block content
                     input#inputPassword.form-control(type='password' placeholder='password' name='password' suggested="current-password")
             .form-group.row
                 .col-sm-10
-                    button.btn.btn-primary(type='submit') Save
+                    button.btn.btn-primary(type='submit') Зберегти
     else
-        p you must login
+        p Дана сторінка доступна лише для зареєстрованих користувачів

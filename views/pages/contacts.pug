@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+    h1 Контакти
+    if (showForm)
+        p Щоб зв'язатися із нами або задати запитання стосовно навчання
+        | заповність форму нижче і ми вам передзвоним
+        //pre= JSON.stringify(message)
+        //pre= JSON.stringify(errors)
+        div.row
+            form.col.col-lg-8.shadow.p-3.m-auto(method='post' id='contactForm' name='contactForm' action='/contacts')
+                input(type='hidden', value='contact form', name='title')
+                p.card-header
+                    span.text-danger.font-weight-bold *
+                    | - обов'язкове поле
+                div.form-row.card-body
+                    div.from-group.col-md-6
+                        label(for='name') Ваше Ім'я:
+                            span.text-danger.font-weight-bold *
+                        - var name = message?message.name:"";
+                        - var areNameError = errors && errors.name
+                        input.form-control(name='name' id='name' type='text' placeholder='Ім\'я' value=name :
+                            required class={'border-danger':areNameError})
+                        if(areNameError)
+                            small#helpBlockPhone.form-text.text-danger Довжина має бути більшою ніж за 4 символи
+                    div.from-group.col-md-6
+                        label(for='number') Ваш контактний номер телефону:
+                            span.text-danger.font-weight-bold *
+                        - var phone = message?message.phone:'';
+                        - var arePhoneError = errors && errors.phone
+                        input.form-control(name='phone' id='number' type='text' placeholder='номер телефону' :
+                            value=phone required class={'border-danger':arePhoneError})
+                        if(arePhoneError)
+                            small#helpBlockPhone.form-text.text-danger Формат номеру +380681234567 .
+                div.form-group.card-body
+                    label(for='description') Description
+                    - var descr = message?message.description:''
+                    textarea#description.form-control(rows='3' name='description' form='contactForm' width="100%")= descr
+                button.btn.btn-primary(type='submit').float-right Надіслати
+    else if (message)
+        p
+            | Дякуємо,
+            b  #{message.name}
+            | , за надсилання форми. Ми Вам передзвонимо за номером
+            b  #{message.phone}.
+    else
+        p Сталася помилка при відображені форми

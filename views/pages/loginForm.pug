@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+    - var email = '';
+    - var userName = '';
+    if body
+        if body.email
+            - email = body.email
+        if body.userName
+            - userName = body.userName
+    div.row: div.m-auto.col-sm-8.col-md-6
+        div.card.text-center.text-dark.border-info.mb-3
+            div.card-header
+                - var caption = 'Форма входу'
+                if formType==='reg'
+                    - caption = 'Форма реєстрації'
+                p.h3= caption
+            form.card-body(method='post')
+                if error
+                    p= error.message
+                    if error.key==='user exist'
+                        span.text-danger Даний email вже використовується
+                    if error.key==='user not exist'
+                        span.text-danger Користувач з даною поштою та паролем не знайдений
+                    if error.key==='invalid'
+                        span.text-danger Неправильно введені дані
+                    //p= JSON.stringify(error)
+                if formType==='reg'
+                    span.text-danger.font-weight-bold *
+                        | - обов'язкове поле
+                    div.form-group
+                        label(for='name') Ваше Ім'я
+                             span.text-danger.font-weight-bold *
+                        input#name.form-control(type='text' name='name' placeholder='Ім\'я' value=userName required=)
+                div.form-group
+                    - var classes = []
+                    if error && error.key && error.key==='email'
+                        - classes.push("border-danger")
+                    label(for='email' class=classes) Email адреса
+                    input#email.form-control(type='email' name='email' placeholder='email' value=email required)
+                div.form-group
+                    label(for='password') Password
+                    input#password.form-control(type='password' name='password' placeholder='password' :
+                        suggested="current-password" required)
+                - var btnName = 'Увійти'
+                if formType==='reg'
+                    - btnName = 'Зареєстуватися та увійти'
+                button.btn.btn-success(type='submit')= btnName

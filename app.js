@@ -14,7 +14,6 @@ const app = express();
 
 mongoose.connect(`mongodb://${db_config.host}:${db_config.port}/${db_config.dbname}`, db_config.options);
 mongoose.connection.on('error', error => console.log(error) );
-// mongoose.Promise = global.Promise;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

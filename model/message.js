@@ -16,7 +16,6 @@ const schema = Schema({
     title:{
         type: String,
         require: true,
-        // enum: ['form', 'resetPassword']
     },
     createdAt:{
         type: Date,

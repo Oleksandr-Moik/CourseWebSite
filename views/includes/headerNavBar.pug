@@ -1,36 +1,38 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     div.container
-        span.navbar-brand.navbar-brand.mb-0.mr-md-4.h1 Cutting and sewing courses
-        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-brand.navbar-brand.mb-0.mr-md-4.h1 Курси крою та шиття
+        button.navbar-toggler(type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation")
             span.navbar-toggler-icon
 
         div.collapse.navbar-collapse#navbarSupportedContent
             ul.navbar-nav.mr-auto
                 li.nav-item(class={active: active_tab==="home"})
-                    a.nav-link(href="/") Home page
+                    a.nav-link(href="/") Головна
 
                 li.nav-item(class={active: active_tab==="contacts"})
-                    a.nav-link(href="/contacts") Contacts
+                    a.nav-link(href="/contacts") Контакти
 
                 li.nav-item(class={active: active_tab==="about"})
-                    a.nav-link(href="/about") About
+                    a.nav-link(href="/about") Про
 
                 if user && user.role
                     if user.role==='admin'
-                        li.nav-item(class={active: active_tab === "Admin"})
-                            a.nav-link(href="/adminka") Admin panel
+                        li.nav-item(class={active: active_tab === "admin"})
+                            a.nav-link(href="/adminka") Адмінка
                     else if user.role==='student'
                         li.nav-item(class={active: active_tab === "theme"})
-                            a.nav-link(href="/themes") Themes
+                            a.nav-link(href="/themes") Теми
                     else if user.role==='teacher'
-                        //li.nav-item(class={active: active_tab === "Admin"})
-                        //    a.nav-link(href="/adminka") Admin panel
+                        li.nav-item(class={active: active_tab === "teacher"})
+                            a.nav-link(href="/adminka") Викладач
                         p (for teacher)
             div.my-2.my-lg-0.navbar-text
                 if auth && user
                     span.h5.pt-1 Greeting,
                         a(href='/profile')  #{user.name}
-                    a(href='/auth/logout').btn.ml-3.btn-outline-primary Log out
+                    a(href='/auth/logout').btn.ml-3.btn-outline-primary Вийти
                 else
-                    a.btn.btn-outline-primary.mr-3(href='/auth/login') Sign in
-                    a.btn.btn-success(href='/auth/signup') Sign up
+                    a.btn.btn-outline-primary.mr-3(href='/auth/login') Увійти
+                    a.btn.btn-success(href='/auth/signup') Реєстрація
