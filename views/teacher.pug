@@ -1,0 +1,68 @@
+extends layout
+
+block content
+    //
+        model - as table name
+        data - list of models, single model and additional data
+        action - [list, edit, create, view]
+    -
+        var baseAdminUrl = '/teacher/'
+
+    h1 Teacher panel
+
+    .row
+        .col
+            .d-flex
+                a.btn.btn-primary.mr-2(href = baseAdminUrl) Teacher panel
+            hr.mb-3
+            if model === 'index_'
+                include ./teacher/collectionTable
+            else if model && action && data
+                // {action} are require for child templates
+                case model
+                    when 'lesson': include ./teacher/lesson/index
+                    when 'message': include ./teacher/message/index
+                    when 'theme': include ./teacher/theme/index
+                    when 'task': include ./teacher/task/index
+                    when 'lesson': include ./teacher/lesson/index
+            else
+                h1.text-danger data are empty
+        .col.d-none
+            p <b>model</b> #{model}
+            p <b>action</b> #{action}
+            p <b>data</b>
+            pre.card.border-dark= data
+
+
+
+    //div
+        h3 Set Lesson
+        form(method='post' action='/teacher/lesson/')
+            if document
+                pre= document
+            input(hidden name="statusName" value="studying")
+            .form-group.row
+                label.col-sm-2.col-form-label(for='studentSelect') Select student
+                .col-sm-10
+                    select#studentSelect.form-control(name='user')
+                        - var select = true
+                        each item in users
+                            - var {firstName, name, status:{statusName},role,_id} = item
+                            option(value=_id selected=select) #{firstName} #{name} | #{role} |#{statusName}
+                            - var select=false
+            .form-group.row
+                label.col-sm-2.col-form-label(for='themeSelect') Select theme
+                .col-sm-10
+                    select#themeSelect.form-control(name='theme')
+                        - var select = true
+                        each item in themes
+                            - var {title,_id} = item
+                            option(value=_id selected=select) #{title}
+                            - var select=false
+            button.btn.btn-success(type='submit') assign lesson
+
+
+
+
+
+

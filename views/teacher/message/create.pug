@@ -1,0 +1,19 @@
+-
+    var errors = error;
+
+div
+    h1.d-inline.mr-4 Creating
+form(method='post' id='createForm')
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputName') Name
+        .col-sm-10
+            input#inputName.form-control(type='text' name='statusName' placeholder='name' value=statusName required)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputTarget') For
+        .col-sm-10
+            input#inputTarget.form-control(type='text' name='target' placeholder='targets' value=target)
+    hr.border-bottom.border-dark
+    .form-group.row
+        .col-sm-10
+            button.btn.btn-success(type='submit') Save
+

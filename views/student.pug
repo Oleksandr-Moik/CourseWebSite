@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 Student cabinet
+
+    h3 Lessons
+    ul
+        each lesson in lessons
+            li= lesson
+    h3 Messages
+    ul
+        each mesg in messages
+            li= mesg

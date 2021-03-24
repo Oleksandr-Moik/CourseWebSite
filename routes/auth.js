@@ -13,15 +13,15 @@ router.all('/signup',(req, res, next) => {
     }
 })
 router.get('/signup',(req, res) => {
-    res.render('loginForm')
+    res.render('pages/auth')
 })
 router.post('/signup', async (req, res,next) => {
     if (!req.body.email || !req.body.password || !req.body.name){
-        res.render('loginForm', {body:req.body, error: {message:"Invalid data", type:'invalid'}})
+        res.render('pages/auth', {body:req.body, error: {message:"Invalid data", type:'invalid'}})
     } else {
         let user = await UserModel.findOne({email: req.body.email});
         if(!user && user!==null){
-            res.render('loginForm',
+            res.render('pages/auth',
                 {body:req.body, error: {message: "User with this email are exist", key:'user exist'}})
         }else{
             try{
@@ -60,11 +60,11 @@ router.all('/login', (req, res, next) => {
     }
 })
 router.get('/login', (req, res, next) => {
-    res.render('loginForm')
+    res.render('pages/auth')
 });
 router.post('/login', async (req, res, next) => {
     if (!req.body.email || !req.body.password){
-        res.render('loginForm', {body:req.body, error: {message:"Invalid data", type:'invalid'}})
+        res.render('pages/auth', {body:req.body, error: {message:"Invalid data", type:'invalid'}})
     } else {
         let {email, password} = req.body;
         let user = await UserModel.findOne({email});
@@ -74,11 +74,11 @@ router.post('/login', async (req, res, next) => {
                 res.locals.auth = true;
                 res.redirect('/profile');
             }else{
-                res.render('loginForm',
+                res.render('pages/auth',
                     {body:req.body, error: {message: "Wrong password", key:'password'}})
             }
         }else{
-            res.render('loginForm',
+            res.render('pages/auth',
                 {body:req.body, error: {message: "User with this email not exist", key:'email'}})
         }
     }

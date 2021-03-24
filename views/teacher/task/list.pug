@@ -1,0 +1,28 @@
+a.btn.btn-success.mr-2(href=currentUrl+'create') Create new
+
+table.table.table-hover
+    thead.thead-light
+        tr
+            th(scope='col') #
+            th(scope='col') Title
+            th(scope='col') Description
+            th(scope='col') Actions
+    tbody
+        -
+            var iter = 1;
+        each task in data
+            - var {title='', description='', _id=''} = task
+            tr
+                th(scope='row')= iter
+
+                td=task.title
+
+                - var short = description, maxLength = 30
+                if short.length > maxLength
+                    - short = short.substring(0, maxLength)+'...'
+                td=short
+
+                td.d-flex
+                    a.mr-1.btn.btn-warning(href='edit/'+_id) Edit
+                    a.mr-1.btn.btn-danger(href='delete/'+_id) Delete
+            - iter++

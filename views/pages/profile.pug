@@ -2,7 +2,6 @@ extends ../layout
 
 block content
     - var firstName='', name='', surname='', email='', phone='', role='', status='';
-    - var errors = error
     if auth
         - var {firstName, name, surname, email, phone, role, status, _id} = user;
         div
@@ -11,25 +10,25 @@ block content
                 p
                     span: b Роль:
                     |  #{role}
-                if status && status.statusName
-                    span.ml-2: b Статус акаунту:
-                    | #{status.statusName}
+                    if status && status.statusName
+                        span.ml-2: b Статус акаунту:
+                        |  #{status.statusName}
         form(method='post')
             input#inputID(type='hidden' value=_id name='id')
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputFirstName') First name
+                label.col-sm-2.col-form-label(for='inputFirstName') Прізвище
                 .col-sm-10
                     input#inputFirstName.form-control(type='text' name='firstname' placeholder='First name' value=firstName)
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputName') Name
+                label.col-sm-2.col-form-label(for='inputName') Ім'я
                 .col-sm-10
                     input#inputName.form-control(type='text' name='name' placeholder='Name' value=name)
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputSurname') Surname
+                label.col-sm-2.col-form-label(for='inputSurname') Побатькові
                 .col-sm-10
                     input#inputSurname.form-control(type='text' name='surname' placeholder='Surname' value=surname)
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputPhone') Phone
+                label.col-sm-2.col-form-label(for='inputPhone') Телефон
                 .col-sm-10
                     input#inputPhone.form-control(type='text' name='phone' placeholder='Phone' value=phone)
             .form-group.row
@@ -37,18 +36,24 @@ block content
                 .col-sm-10
                     input#inputEmail.form-control(type='email' name='email' placeholder='Email' value=email)
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputNewPassword') New Password
+                label.col-sm-2.col-form-label(for='inputNewPassword') Новий пароль
                 .col-sm-10
                     input#inputNewPassword.form-control(type='password' name='newPassword' placeholder='New' suggested="new-password")
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputRepeatPassword') Repeat Password
+                label.col-sm-2.col-form-label(for='inputRepeatPassword') Повторість пароль
                 .col-sm-10
                     input#inputRepeatPassword.form-control(type='password' name='repeatPassword' placeholder='Repeat new' suggested="new-password")
+                - var areRepeatPasswordError = errors && errors.repeatPassword
+                    if(areRepeatPasswordError)
+                        small#helpBlockPhone.form-text.text-danger Паролі не співпали
             hr.border-bottom.border-dark
             .form-group.row
-                label.col-sm-2.col-form-label(for='inputPassword') Enter current password
+                label.col-sm-2.col-form-label(for='inputPassword') Поточний пароль
                 .col-sm-10
                     input#inputPassword.form-control(type='password' placeholder='password' name='password' suggested="current-password")
+                    - var arePasswordError = errors && errors.password
+                    if(arePasswordError)
+                        small#helpBlockPhone.form-text.text-danger Паролі не відповідає поточному
             .form-group.row
                 .col-sm-10
                     button.btn.btn-primary(type='submit') Зберегти

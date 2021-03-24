@@ -27,10 +27,10 @@ block content
                     when 'status': include ./admin/status/index
             else
                 h1.text-danger data are empty
-        .col.d-none
+        .col
             p <b>model</b> #{model}
             p <b>action</b> #{action}
             p <b>data</b>
-            pre.card.border-dark= data
+            pre.card.border-dark(style='height:300px;')=JSON.stringify(data)
 
 

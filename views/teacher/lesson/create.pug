@@ -1,0 +1,39 @@
+-
+    var errors = error;
+    var {statuses=[], themes=[], users=[]} = data;
+
+div
+    h1.d-inline.mr-4 Creating
+form(method='post')
+    .form-group.row
+        label.col-sm-2.col-form-label(for='themeSelect') Select theme
+        .col-sm-10
+            select#themeSelect.form-control(name='theme')
+                - var select = true
+                each item in themes
+                    - var {title,_id} = item
+                    option(value=_id selected=select)=title
+                    - var select=false
+    .form-group.row
+        label.col-sm-2.col-form-label(for='userSelect') Select user
+        .col-sm-10
+            select#userSelect.form-control(name='user')
+                - var select = true
+                each item in users
+                    - var {firstName, name, status:{statusName},role,_id} = item
+                    option(value=_id selected=select) #{firstName} #{name} | #{role} |#{statusName}
+                    - var select=false
+    .form-group.row
+        label.col-sm-2.col-form-label(for='statusSelect') Select status
+        .col-sm-10
+            select#statusSelect.form-control(name='statusName')
+                - var select = true
+                each itemm in statuses
+                    - var {statusName:item} = itemm
+                    option(value=item selected=select)=item
+                    - var select=false
+    hr.border-bottom.border-dark
+    .form-group.row
+        .col-sm-10
+            button.btn.btn-success(type='submit') Save
+

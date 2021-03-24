@@ -1,0 +1,24 @@
+-
+    var errors = error;
+    var {title='',description='', _id='', tasks:tasksIds=[], Tasks:allTasks=[]} = data;;
+div
+    h1.d-inline.mr-4 Creating
+form(method='post' id='editForm')
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputTitle') Title
+        .col-sm-10
+            input#inputTitle.form-control(type='text' name='title' placeholder='Title' value=title required)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='description') Description
+        textarea#description.form-control(rows='3' name='description' form='editForm' required)= description
+    .form-group
+        label(for='taskSelect') Select task
+        select#taskSelect.form-control(multiple='' name='tasks')
+            each task in allTasks
+                option(value=task._id)= task.title
+
+    hr.border-bottom.border-dark
+    .form-group.row
+        .col-sm-10
+            button.btn.btn-success(type='submit') Save
+

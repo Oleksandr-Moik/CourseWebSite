@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const UserModel = require('../model/user')
 const MessageModel = require('../model/message')
 const StatusModel = require('../model/status')
 const ThemeModel = require('../model/theme')
@@ -38,6 +39,7 @@ router.get('/contacts', (req, res) => {
 router.post('/contacts', async (req, res) => {
   let {title, name, phone, description} = req.body;
   let status = await StatusModel.findOne({statusName:'notReaded'})
+  let targetUser = '6050197d40ef6431b01ce241';
   let errors = {}
   try{
     if (name.length<4){
@@ -49,7 +51,7 @@ router.post('/contacts', async (req, res) => {
     if (errors.errors){
       throw new Error()
     }
-    let message = await new MessageModel({title, name, phone, description, status}).save()
+    let message = await new MessageModel({title, name, phone, description, status, targetUser}).save()
     res.render('pages/contacts', {showForm: false, message})
   }catch (e){
     res.render('pages/contacts', {showForm: true, message:req.body, errors: {...e.errors, ...errors}})
@@ -69,11 +71,29 @@ router.all('/profile', (req, res, next) => {
 router.get('/profile', (req, res,next) => {
     res.render('pages/profile', {user: req.session.user});
 })
-router.post('/profile', (req, res, next) =>{
+router.post('/profile', async (req, res, next) => {
   // todo post profile - save settings
-  let body = req.body;
-  // check user password
-  next();
+  let errors = {}
+  try{
+    let {firstName, name, surName, email, phone, password, newPassword, repeatPassword, role, _id} = req.body
+    if(newPassword!==repeatPassword){
+      errors.repatPassword = {name:'passwords are not equal'}
+      throw new Error('');
+    }
+    let user = await UserModel.findOne({_id});
+    if (!user.isValidPassword(password)){
+      errors.repatPassword = {name:'invalid current password'}
+      throw new Error('');
+    }
+    user = await UserModel.findOneAndUpdate({_id}, {firstName, name, surName, email, phone, newPassword, role})
+    req.session.user = user
+    res.locals.user = user
+
+    res.render('pages/profile', {user});
+  }catch (e){
+    res.render('pages/profile', {user: req.session.user, errors: {...errors, e}})
+    next(e);
+  }
 });
 
 module.exports = router;

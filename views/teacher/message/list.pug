@@ -13,12 +13,8 @@ table.table.table-hover
     tbody
         -
             var iter = 1;
-            var {messages, users} = data
-
-        each item in messages
-            -
-                var {title='', description='', targetUser:userId='', status:{statusName=''}, createdAt='', _id} = item
-                var firstName='', name='';
+        each item in data
+            - var {title='', description='', targetUser:userId='', status:{statusName=''}, createdAt='', _id} = item
             tr
                 th(scope='row')= iter
                 td=title

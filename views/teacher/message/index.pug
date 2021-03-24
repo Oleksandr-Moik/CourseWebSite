@@ -1,0 +1,14 @@
+// data
+    action
+
+- var currentUrl = baseAdminUrl+'messages/'
+if action!=='list'
+    a.btn.btn-primary.mr-2(href=currentUrl) All messages
+
+case action
+    when 'list': include ./list
+    when 'edit': include ./edit
+    when 'create': include ./create
+    when 'delete': include ./delete
+
+

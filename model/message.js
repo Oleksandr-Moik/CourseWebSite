@@ -35,6 +35,13 @@ const schema = Schema({
 });
 
 schema.pre(
+    'save',
+    function (next) {
+        this.createdAt = Date.now();
+        next();
+    }
+)
+schema.pre(
     ['update*','save'],
     function (next) {
         this.updatedAt = Date.now();

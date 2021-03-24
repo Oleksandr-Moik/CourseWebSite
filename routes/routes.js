@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const indexRoute = require('./routes/index');
-const authRoute = require('./routes/auth');
-const adminRoute = require('./routes/admin');
+const indexRoute = require('./index');
+const authRoute = require('./auth');
+const adminRoute = require('./admin');
+const teacherRoute = require('./teacher');
+const studentRoute = require('./student');
 
 const checkSignIn = (req, res, next) => {
     // res.locals.auth = false;
@@ -30,6 +32,8 @@ const checkSignIn = (req, res, next) => {
 }
 router.use(checkSignIn);
 router.use('/', indexRoute);
+router.use('/teacher', teacherRoute);
+router.use('/student', studentRoute);
 router.use('/auth', authRoute);
 router.use('/adminka', adminRoute);
 

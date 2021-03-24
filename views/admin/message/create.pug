@@ -1,17 +1,49 @@
--
-    var errors = error;
-
 div
     h1.d-inline.mr-4 Creating
 form(method='post' id='createForm')
+    -
+        var {users, statuses, message} = data
+        if (message)
+            var {name, phone, description, title} = message
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputName') Name
+        label.col-sm-2.col-form-label(for='inputName') Guest name
         .col-sm-10
-            input#inputName.form-control(type='text' name='statusName' placeholder='name' value=statusName required)
+            input#inputName.form-control(type='text' name='name' :
+                placeholder='name' value=name required)
     .form-group.row
-        label.col-sm-2.col-form-label(for='inputTarget') For
+        label.col-sm-2.col-form-label(for='inputPhone') Phone
         .col-sm-10
-            input#inputTarget.form-control(type='text' name='target' placeholder='targets' value=target)
+            input#inputPhone.form-control(type='text' name='phone' :
+            placeholder='phone' value=phone required)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputDescr') Description
+        .col-sm-10
+            input#inputDescr.form-control(type='text' name='description' :
+            placeholder='description' value=description required)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='inputTitle') Title
+        .col-sm-10
+            input#inputTitle.form-control(type='text' name='title' :
+                placeholder='title' value=title)
+    .form-group.row
+        label.col-sm-2.col-form-label(for='userSelect') Select user #{typeof users}
+        .col-sm-10
+            select#userSelect.form-control(name='targetUser')
+                - var select = true
+                - users.push({name: 'teacher', _id: 'teacher'})
+                each item in users
+                    - var {firstName='', name='', status:{statusName=''}='',role='',_id=''} = item
+                    option(value=_id selected=select) #{firstName} #{name} | #{role} |#{statusName}
+                    - var select=false
+    .form-group.row
+        label.col-sm-2.col-form-label(for='statusSelect') Select status
+        .col-sm-10
+            select#statusSelect.form-control(name='statusName')
+                - var select = true
+                each itemm in statuses
+                    - var {statusName:item} = itemm
+                    option(value=item selected=select)=item
+                    - var select=false
     hr.border-bottom.border-dark
     .form-group.row
         .col-sm-10

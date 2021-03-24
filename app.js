@@ -7,7 +7,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
-const routes = require('./routes');
+const routes = require('./routes/routes');
 const db_config = require('./config/db')
 
 const app = express();
