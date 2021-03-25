@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const MessageModel = require('../model/message')
+const StatusModel = require('../model/status')
 
 const indexRoute = require('./index');
 const authRoute = require('./auth');
@@ -30,7 +32,25 @@ const checkSignIn = (req, res, next) => {
     }
     next();
 }
+const checkNotReadedMessanges = async (req,res,next)=>{
+    try{
+        if(req.session.user && res.locals.auth===true){
+            let statusNotReaded = await StatusModel.findOne({statusName:'notReaded'})
+            let targetUser =[res.locals.user._id];
+            if(req.locals.user.role==='teacher')targetUser.push('teacher');
+            if(req.locals.user.role==='admin')targetUser.push('admin');
+
+            res.locals.unreadedMessangesCoutn =  await MessageModel.find({targetUser,status:statusNotReaded});;
+        }
+    }catch (e){
+        // next()
+    }finally {
+        next()
+    }
+}
 router.use(checkSignIn);
+// router.use(checkNotReadedMessanges);
+
 router.use('/', indexRoute);
 router.use('/teacher', teacherRoute);
 router.use('/student', studentRoute);

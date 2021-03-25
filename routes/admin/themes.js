@@ -22,7 +22,7 @@ router.get('/create', async (req,res,next)=>{
 });
 router.post('/create', async (req, res, next)=>{
     try{
-        let {title, description, tasksIds} = req.body
+        let {title, description, tasks} = req.body
         let document = await new ThemeModel({title, description, tasks:tasksIds}).save();
         res.redirect('edit/'+document._id);
     }catch (e){
@@ -43,8 +43,8 @@ router.get('/edit/:id', async (req, res, next) => {
 });
 router.post(['/edit','/edit/:id'], async (req, res, next) => {
     try{
-        let {title, description, tasksIds, _id} = req.body
-        await ThemeModel.findOneAndUpdate ({_id},{title, description, tasks:tasksIds})
+        let {title, description, tasks, _id} = req.body
+        await ThemeModel.findOneAndUpdate ({_id},{title, description, tasks})
         res.redirect('edit/'+_id)
     }catch (e){
         next(e);
@@ -64,7 +64,7 @@ router.post('/delete/:id', async (req, res, next) => {
     try{
         let {_id} = req.body;
         await ThemeModel.deleteOne({_id})
-        res.redirect('themes/');
+        res.redirect('../../lessons');
     }catch (e){
         next(e);
     }

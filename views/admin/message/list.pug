@@ -1,5 +1,9 @@
 a.btn.btn-success.mr-2(href=currentUrl+'create') Create new
 
+-
+    var iter = 1;
+    var {messages = [], users = []} = data
+
 table.table.table-hover
     thead.thead-light
         tr
@@ -11,14 +15,11 @@ table.table.table-hover
             th(scope='col') Status
             th(scope='col') Actions
     tbody
-        -
-            var iter = 1;
-            var {messages, users} = data
-
         each item in messages
             -
-                var {title='', description='', targetUser:userId='', status:{statusName=''}, createdAt='', _id} = item
+                var {title='', description='', targetUser:userId='', status:{statusName=''}='', createdAt='', _id} = item
                 var firstName='', name='';
+                var user = users.find(u=>u._id.toString()===userId)||{name:userId, firstName:''}
             tr
                 th(scope='row')= iter
                 td=title
@@ -27,7 +28,7 @@ table.table.table-hover
                     if (description.length>20)
                         shortDesc = description.substring(0,19)+"..."
                 td=shortDesc
-                td=userId
+                td=user.firstName+ " " + user.name
                 td=createdAt
                 td=statusName
                 td.d-flex

@@ -2,9 +2,9 @@ div
     h1.d-inline.mr-4 Creating
 form(method='post' id='createForm')
     -
-        var {users, statuses, message} = data
-        if (message)
-            var {name, phone, description, title} = message
+        var {users=[], statuses=[], message:msg=''} = data
+        // if (message)
+        var {name='', phone='', description='', title=''} = msg
     .form-group.row
         label.col-sm-2.col-form-label(for='inputName') Guest name
         .col-sm-10

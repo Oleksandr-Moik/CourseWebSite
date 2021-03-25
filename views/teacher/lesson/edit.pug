@@ -1,6 +1,7 @@
 -
     var errors = error;
-    var {statuses = [], themes = [], users = [], _id='', user:userId, theme:themeId, status:{statusName_lesson}} = data;
+    var {users=[],statuses=[],themes = [],lesson={}} = data
+    var {_id='', user:userId='', theme:themeId='', status:{statusName:statusName_lesson=''}=''} = lesson;
 
 div
     h1.d-inline.mr-4 Editing

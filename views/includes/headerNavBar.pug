@@ -17,23 +17,23 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                 // li.nav-item(class={active: active_tab==="about"})
                     a.nav-link(href="/about") Про
 
-                li.nav-item(class={active: active_tab === "student"})
+                //li.nav-item(class={active: active_tab === "student"})
                     a.nav-link(href="/student") Учень
 
-                li.nav-item(class={active: active_tab === "teacher"})
+                //li.nav-item(class={active: active_tab === "teacher"})
                     a.nav-link(href="/teacher") Викладач
 
-                li.nav-item(class={active: active_tab === "admin"})
+                //li.nav-item(class={active: active_tab === "admin"})
                     a.nav-link(href="/adminka") Адмінка
 
-                //if user && user.role
+                if user && user.role
                     if user.role==='admin'
                         li.nav-item(class={active: active_tab === "admin"})
                             a.nav-link(href="/adminka") Адмінка
-                    else if user.role==='student'
+                    if user.role==='student' || user.role==='admin'
                         li.nav-item(class={active: active_tab === "student"})
                             a.nav-link(href="/student") Учень
-                    else if user.role==='teacher'
+                    if user.role==='teacher' || user.role==='admin'
                         li.nav-item(class={active: active_tab === "teacher"})
                             a.nav-link(href="/teacher") Викладач
 
@@ -41,6 +41,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                 if auth && user
                     span.h5.pt-1 Вітаємо,
                         a(href='/profile')  #{user.name}
+                    if unreadedMessangesCoutn
+                        span.text-warning You have #{unreadedMessangesCoutn.length} msgs
                     a(href='/auth/logout').btn.ml-3.btn-outline-primary Вийти
                 else
                     a.btn.btn-outline-primary.mr-3(href='/auth/login') Увійти

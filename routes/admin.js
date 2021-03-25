@@ -8,6 +8,7 @@ router.all('/*', (req, res, next) => {
         req.session.user.role==='admin' )
     {
         res.locals.pageTitle = 'Admin panel';
+        res.locals.active_tab = 'admin'
         next();
     }else{
         let err = new Error('Not found');

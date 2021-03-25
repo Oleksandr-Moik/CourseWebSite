@@ -7,11 +7,11 @@ const StatusModel = require('../../model/status');
 
 router.get('/', async (req, res, next) => {
     try{
+        let {theme, user, statusName} = req.body
         let lessons = await LessonModel.find({});
         let themes = await ThemeModel.find({});
-        let users = await UserModel.find({});
-        let additionalData = {themes, users}
-        res.render('teacher', {model:'lesson', data:lessons, action:'list', additionalData})
+        let users = await UserModel.find({})
+        res.render('teacher', {model:'lesson', data:{users, themes, lessons}, action:'list'})
     }catch (e){
         next(e)
     }
@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 router.get('/create', async (req,res,next)=>{
     try{
         let themes = await ThemeModel.find({});
-        let users = await UserModel.find({});
+        let users = await UserModel.find({role:'student'})
         let statuses = await StatusModel.find({for:'lesson'});
         res.render('teacher',{model:'lesson', data:{statuses, themes, users}, action:'create'})
     }catch (e){
@@ -41,12 +41,11 @@ router.post('/create', async (req, res, next)=>{
 
 router.get('/edit/:id', async (req, res, next) => {
     try{
-        let document = await LessonModel.findOne({_id:req.params.id});
-        let user = await UserModel.findOne({_id:document.user});
-        let theme = await ThemeModel.findOne({_id:document.theme});
+        let lesson = await LessonModel.findOne({_id:req.params.id});
+        let users = await UserModel.find();
+        let themes = await ThemeModel.find();
         let statuses = await StatusModel.find({for:'lesson'});
-        let data = {...document._doc, users:[user], themes:[theme], statuses}
-        res.render('teacher', {model:'lesson', data, action: "edit"})
+        res.render('teacher', {model:'lesson', data:{users, themes, statuses, lesson}, action: "edit"})
     }catch (e){
         next(e)
     }

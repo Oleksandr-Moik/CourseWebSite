@@ -57,7 +57,7 @@ router.post('/delete/:id', async (req, res, next) => {
     try{
         let {_id} = req.body;
         await StatusModel.deleteOne({_id})
-        res.redirect('statuses/');
+        res.redirect('../../statuses/');
     }catch (e){
         next(e);
     }

@@ -2,12 +2,48 @@ extends layout
 
 block content
     h1 Student cabinet
-
+    - var {lessons=[], themes=[],messages=[], tasks=[]} = data
     h3 Lessons
-    ul
+    div.d-flex.row.flex-md-wrap.card-deck
         each lesson in lessons
-            li= lesson
+            - var theme = themes.find(theme=>theme._id.toString()===lesson.theme)
+            .card.col-md-6.border-info
+                .card-header= "Стан: " + lesson.status.statusName
+                .card-body.text-info
+                    h5.card-title= theme.title
+                    p.card-text= theme.description
+                details
+                    summary Завдання
+                    p
+                        each task in tasks
+                            if theme.tasks.includes(task._id.toString())
+                                details
+                                    summary.font-weight-bold= task.title
+                                    p.font-italic=task.description
+                .card-footer= 'Завдань: ' + theme.tasks.length
     h3 Messages
-    ul
-        each mesg in messages
-            li= mesg
+    div.row.d-flex.flex-column-reverse
+        each message in messages
+            if message
+                - var {title='', description='',status='',_id='', createdAt=''} = message||{status:{statusName:''}}
+                if !status
+                    - status = {statusName:''}
+                .card.col-12.border-info.mt-4
+                    .card-header= title +' | '+status.statusName
+                    .card-body.text-info
+                        //h5.card-title= theme.title
+                        p.card-text= description
+                    .card-footer
+                        .d-flex.justify-content-between
+                            span= createdAt
+                            form(method='post')
+                                input(type="hidden" name='_id' value=_id )
+                                input(type="hidden" name='type' value='message' )
+                                - var text = 'readed'
+                                if status.statusName==='readed'
+                                    input(type="hidden" name='statusName' value='notReaded' )
+                                    - text = 'not readed'
+                                else
+                                    input(type="hidden" name='statusName' value='readed' )
+                                    - text = 'readed'
+                                button.btn.btn-outline-primary(type='submit')= 'Mark as ' + text

@@ -10,8 +10,8 @@ router.get('/', async (req, res, next) => {
         let lessons = await LessonModel.find({});
         let themes = await ThemeModel.find({});
         let users = await UserModel.find({});
-        let additionalData = {themes, users}
-        res.render('admin', {model:'lesson', data:lessons, action:'list', additionalData})
+        res.locals.errDet = JSON.stringify({lessons, themes, users});
+        res.render('admin', {model:'lesson', data: {lessons, themes, users}, action:'list', })
     }catch (e){
         next(e)
     }
@@ -75,7 +75,7 @@ router.post('/delete/:id', async (req, res, next) => {
     try{
         let {_id} = req.body;
         await LessonModel.deleteOne({_id})
-        res.redirect('lessons/');
+        res.redirect('../../lessons/');
     }catch (e){
         next(e);
     }

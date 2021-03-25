@@ -20,8 +20,7 @@ router.get('/create', async (req,res,next)=>{
     try{
         let users = await UserModel.find({});
         let statuses = await StatusModel.find({for:'message'});
-
-        res.render('admin',{model:'message', data:{statuses, users, message:{}}, action:'create'})
+        res.render('admin',{model:'message', data:{statuses, users}, action:'create'})
     }catch (e){
         next(e)
     }

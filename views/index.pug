@@ -2,7 +2,7 @@ extends layout
 
 block content
   //h1= title
-  if auth && lessons && themes
+  if auth && lessons && themes && false
     div.d-flex.row.flex-md-wrap.card-deck
       each lesson in lessons
         - var theme = themes.find(theme=>theme._id.toString()===lesson.theme)
@@ -16,7 +16,7 @@ block content
 
 
   else
-    h1 Про
+    h1 Головна
     p На наших курсах ви опануєте мистецтво шити як власний одяг
       | так і шити на замовлення.
     p Запрошуємо на наші курси

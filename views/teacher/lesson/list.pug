@@ -11,8 +11,8 @@ table.table.table-hover
     tbody
         -
             var iter = 1;
-            var {themes=[], users=[]} = additionalData;
-        each lesson in data
+            var {themes=[], users=[], lessons=[]} = data;
+        each lesson in lessons
             -
                 var {theme:themeId, user:userId, status:{statusName}, _id=''} = lesson
                 var user = users.find(u=>u._id.toString()===userId)
