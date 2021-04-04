@@ -5,8 +5,7 @@ block content
         model - as table name
         data - list of models, single model and additional data
         action - [list, edit, create, view]
-    -
-        var baseAdminUrl = '/adminka/'
+    - var baseAdminUrl = '/adminka/'
 
     .row
         .col
@@ -32,5 +31,3 @@ block content
             p <b>action</b> #{action}
             p <b>data</b>
             pre.card.border-dark(style='height:300px;')=JSON.stringify(data)
-
-

@@ -21,7 +21,7 @@ const checkSignIn = (req, res, next) => {
             res.locals.userName = req.session.user.name;
             res.locals.user = req.session.user;
             res.locals.auth = true;
-            res.cookie('user',JSON.stringify(req.session.user), {maxAge: 1800000}) // 30 min
+            res.cookie('user',JSON.stringify(req.session.user), {maxAge: 1800000}) // 30 min  = 30 min * 60 sec/min * 1000 ms/sec = 1800000 ms
         }else{
             res.send('contact with teacher or admin for activate your account')
         }

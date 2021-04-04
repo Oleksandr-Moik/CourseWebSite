@@ -2,8 +2,8 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const lessMiddleware = require('less-middleware');
 const logger = require('morgan');
+const lessMiddleware = require('less-middleware');
 const mongoose = require('mongoose');
 const session = require('express-session');
 

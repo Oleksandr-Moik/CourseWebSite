@@ -6,5 +6,4 @@ const db = {
     password: '',
     options: {useNewUrlParser: true, useUnifiedTopology: true}
 }
-
 module.exports = db

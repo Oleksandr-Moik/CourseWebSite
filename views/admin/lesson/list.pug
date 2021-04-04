@@ -14,7 +14,6 @@ table.table.table-hover
             th(scope='col') actions
     tbody
         each lesson in lessons
-
             - var {theme:themeId='', user:userId='', status:{statusName=''}='', _id=''} = lesson
             - var user = users.find(u=>u._id.toString()===userId)
             - var {title=''} = themes.find(t=>t._id.toString()===themeId)||{}

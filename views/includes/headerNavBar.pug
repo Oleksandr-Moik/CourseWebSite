@@ -14,18 +14,6 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                 li.nav-item(class={active: active_tab==="contacts"})
                     a.nav-link(href="/contacts") Контакти
 
-                // li.nav-item(class={active: active_tab==="about"})
-                    a.nav-link(href="/about") Про
-
-                //li.nav-item(class={active: active_tab === "student"})
-                    a.nav-link(href="/student") Учень
-
-                //li.nav-item(class={active: active_tab === "teacher"})
-                    a.nav-link(href="/teacher") Викладач
-
-                //li.nav-item(class={active: active_tab === "admin"})
-                    a.nav-link(href="/adminka") Адмінка
-
                 if user && user.role
                     if user.role==='admin'
                         li.nav-item(class={active: active_tab === "admin"})
